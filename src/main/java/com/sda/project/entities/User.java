@@ -22,10 +22,16 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     @NotBlank
-    private String name;
+    private String password;
+
+    @NotBlank
+    private String firstName;
+
+    @NotBlank
+    private String lastName;
 
     @Email
     @NotBlank
@@ -33,21 +39,33 @@ public class User {
     private String email;
 
     @NotBlank
-    private String country;
+    private String gender;
+    // it needs enum
 
     @NotNull
     private LocalDate dateOfBirth;
 
-    public User(String name, String email, String country, LocalDate dateOfBirth) {
-        this.name = name;
+    private String profilePicture;
+
+    @NotNull
+    private String status;
+
+    public User(String password, String firstName, String lastName, String email, String gender, LocalDate dateOfBirth, String profilePicture, String status) {
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.country = country;
+        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
+        this.profilePicture = profilePicture;
+        this.status = status;
     }
 
     public User(String name, String email, String country) {
         this(name, email, country, LocalDate.now());
     }
+
+
 
     @JsonIgnore
     public int getAge() {
