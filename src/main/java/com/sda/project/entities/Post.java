@@ -18,7 +18,7 @@ import java.time.Period;
 @Getter
 @ToString
 @NoArgsConstructor
-public class User {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,14 +38,14 @@ public class User {
     @NotNull
     private LocalDate dateOfBirth;
 
-    public User(String name, String email, String country, LocalDate dateOfBirth) {
+    public Post(String name, String email, String country, LocalDate dateOfBirth) {
         this.name = name;
         this.email = email;
         this.country = country;
         this.dateOfBirth = dateOfBirth;
     }
 
-    public User(String name, String email, String country) {
+    public Post(String name, String email, String country) {
         this(name, email, country, LocalDate.now());
     }
 
