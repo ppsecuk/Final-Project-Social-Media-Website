@@ -61,14 +61,9 @@ public class User {
         this.status = status;
     }
 
-    public User(String name, String email, String country) {
-        this(name, email, country, LocalDate.now());
-    }
+//    public User(String name, String email, String country) {
+//        this(name, email, country, LocalDate.now());
+//    }
 
 
-
-    @JsonIgnore
-    public int getAge() {
-        return Period.between(dateOfBirth, LocalDate.now()).getYears();
-    }
 }
