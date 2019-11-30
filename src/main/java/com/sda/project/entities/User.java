@@ -11,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -38,9 +39,9 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotBlank
-    private String gender;
-    // it needs enum
+    //@NotBlank
+    @Enumerated(value = EnumType.STRING)
+    private UserGender gender;
 
     @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -51,15 +52,6 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserStatus status;
 
-    public User(String password, String firstName, String lastName, String email, String gender, LocalDate dob,
-                String profilePicture, UserStatus status) {
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.dob = dob;
-        this.profilePicture = profilePicture;
-        this.status = status;
-    }
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    private List<Post> posts;
 }

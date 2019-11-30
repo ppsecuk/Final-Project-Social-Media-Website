@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container" th:fragment="postFragment">
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <section class="post-heading">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="media">
+                                <div class="media-left">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">
+                                        <span th:text="${post.user.firstName}"></span>
+                                    <span class="media-heading" th:text="${post.user.lastName}">
+                                    </span></h4>
+<!--                                    <span class="anchor-time" th:text="${post.date.format(localDateTime, 'yyyy-MM-dd HH:mm')}"></span>-->
+                                    <span th:text="${#temporals.format(post.date, 'yyyy-MM-dd HH:mm')}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+                            <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                        </div>
+                    </div>
+                </section>
+                <section class="post-body">
+                    <p th:text="${post.content}"></p>
+                </section>
+                <section class="post-footer">
+                    <hr>
+                    <div class="post-footer-option container">
+                        <ul class="list-unstyled">
+                            <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-comment"></i> Comment</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="post-footer-comment-wrapper">
+                        <div class="comment-form">
+
+                        </div>
+                        <div class="comment">
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
