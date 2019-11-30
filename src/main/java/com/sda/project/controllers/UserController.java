@@ -1,8 +1,10 @@
 package com.sda.project.controllers;
 
 import com.sda.project.entities.User;
+import com.sda.project.entities.UserGender;
 import com.sda.project.entities.UserStatus;
 import com.sda.project.repositories.UsersRepository;
+import com.sda.project.services.PostService;
 import com.sda.project.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -22,6 +26,8 @@ public class UserController {
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
+    @Autowired
+    private PostService postService;
     @GetMapping("/")
     public String home(Model model) {
         //model.addAttribute("users", userRepository.findAll());
@@ -31,6 +37,7 @@ public class UserController {
     @GetMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("genders", UserGender.values());
         return "user-add";
     }
 
@@ -57,8 +64,14 @@ public class UserController {
         }
         else {
             model.addAttribute("user", valUser);
+            model.addAttribute("posts", postService.getPostsByUserId(valUser.getUserId()));
             return "user-profile";
         }
 
+    }
+
+    @GetMapping("/delete")
+    public String delete(){
+        return "user-delete";
     }
 }
