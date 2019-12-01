@@ -74,4 +74,19 @@ public class UserController {
     public String delete(){
         return "user-delete";
     }
+
+    @GetMapping("feed")
+    public String goToFeed(){
+        return "feed";
+    }
+
+    @GetMapping("list-of-friends")
+    public String goToFriendList(){
+        return "friend-list";
+    }
+
+    @GetMapping("list-of-users")
+    public String goToListOfUsers(){
+        return "user-list";
+    }
 }

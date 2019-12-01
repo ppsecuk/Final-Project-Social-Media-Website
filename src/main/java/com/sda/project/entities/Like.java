@@ -6,57 +6,26 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Entity
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
+@Table(name = "likes")
+
 public class Like {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    //@ManyToOne
+    @JoinColumn(name = "user_id")
     private Integer userId;
 
-    @NotBlank
-    private String password;
+    //@ManyToOne
+    @JoinColumn(name = "post_id")
+    private Integer postId;
 
-    @NotBlank
-    private String firstName;
-
-    @NotBlank
-    private String lastName;
-
-    @Email
-    @NotBlank
-    @Column(unique = true)
-    private String email;
-
-    @NotBlank
-    private String gender;
-    // it needs enum
-
-    @NotNull
-    private LocalDate dob;
-
-    private String profilePicture;
-
-    @NotNull
-    private String status;
-
-    public Like(String password, String firstName, String lastName, String email, String gender, LocalDate dob,
-                   String profilePicture, String status) {
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.dob = dob;
-        this.profilePicture = profilePicture;
-        this.status = status;
-    }
 }
