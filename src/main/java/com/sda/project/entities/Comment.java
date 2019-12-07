@@ -22,14 +22,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //@ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private Integer userId;
-
-    //@ManyToOne
-//    @JoinColumn(name = "post_id")
-//    private Integer postId;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

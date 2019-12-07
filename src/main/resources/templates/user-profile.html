@@ -108,108 +108,106 @@
 </head>
 <body>
 <div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <br>
-                    <img src="https://wj32.org/processhacker/forums/styles/canvas/theme/images/no_avatar.jpg"
-                         height="245" width="220" alt=""/><br>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <br>
+                <img src="https://wj32.org/processhacker/forums/styles/canvas/theme/images/no_avatar.jpg"
+                     height="245" width="220" alt=""/><br>
 
-                </div>
             </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5>
-                        Hello <span th:text="${user.firstName}"></span><br>
-                        Welcome to our social network!<br><br><br><br><br><br>
-                    </h5>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                        </li>
-                    </ul>
-                </div>
+        </div>
+        <div class="col-md-6">
+            <div class="profile-head">
+                <h5>
+                    Hello <span th:text="${session.user.firstName}"></span><br>
+                    Welcome to our social network!<br><br><br><br><br><br>
+                </h5>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
 <!--                <input type="submit" class="profile-edit-btn btn btn-danger" name="btnAddMore" value="Delete profile"/>-->
-                <a href="#myModal" data-toggle="modal" class="profile-edit-btn btn btn-danger trigger-btn">Delete user</a>
-                <a href="/" class="profile-edit-btn btn btn-primary">Logout</a>
+            <a href="#myModal" data-toggle="modal" class="profile-edit-btn btn btn-danger trigger-btn">Delete user</a>
+            <a href="/" class="profile-edit-btn btn btn-primary">Logout</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-work">
+                <br>
+                <p>Links</p>
+                <a href="/feed">Feed</a><br/>
+                <a href="/list-of-users">List of users</a><br/>
+                <a href="/list-of-friends">My friends</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    <br>
-                    <p>Links</p>
-                    <a href="/feed">Feed</a><br/>
-                    <a href="/list-of-users">List of users</a><br/>
-                    <a href="/list-of-friends">My friends</a>
+        <div class="col-md-8">
+            <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" th:object="${session.user}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>User Id</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><span th:text="*{userId}"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><span th:text="*{firstName}" ></span>
+                                <span th:text="*{lastName}" ></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Email</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><span th:text="*{email}"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Gender</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><span th:text="*{gender}"></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Date of birth</label>
+                        </div>
+                        <div class="col-md-6">
+                            <p><span th:text="*{dob}"></span></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>User Id</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p><span th:text="${user.userId}"></span></p>
-                            </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <!--<div class="row">
+                        <div class="col-md-6">
+                            <label>Experience</label>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Name</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p><span th:text="${user.firstName}" ></span>
-                                    <span th:text="${user.lastName}" ></span></p>
-                            </div>
+                        <div class="col-md-6">
+                            <p>Expert</p>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p><span th:text="${user.email}"></span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Gender</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p><span th:text="${user.gender}"></span></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Date of birth</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p><span th:text="${user.dob}"></span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <!--<div class="row">
-                            <div class="col-md-6">
-                                <label>Experience</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>-->
-                        <div th:each="post : ${posts}" th:insert="post :: postFragment"></div>
-                    </div>
+                    </div>-->
+                    <div th:each="post : ${posts}" th:insert="post :: postFragment"></div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 <!-- Modal HTML -->
@@ -231,7 +229,7 @@
 <!--
                 <button type="button" class="btn btn-danger">Delete</button>
 -->
-                <a href="/" class="profile-edit-btn btn btn-danger trigger-btn">Delete</a>
+                <a href="/delete" class="profile-edit-btn btn btn-danger trigger-btn">Delete</a>
             </div>
         </div>
     </div>
