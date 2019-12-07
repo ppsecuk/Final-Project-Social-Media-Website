@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class UserController {
     private UserService userService;
     @Autowired
     private PostService postService;
-    @GetMapping("/")
+    @GetMapping({"/", "/index"})
     public String home(Model model) {
         //model.addAttribute("users", userRepository.findAll());
         return "index";
@@ -42,28 +43,27 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public String create(@Valid User newUser, Model model, BindingResult result) {
+    public String create(@Valid User newUser, Model model, BindingResult result, HttpSession session) {
 
         User savedUser = userService.createUser(newUser);
         if(result.hasErrors()) {
             return "user-add";
         }
         else {
-            model.addAttribute("user", savedUser);
+            session.setAttribute("user", savedUser);
             return "user-profile";
         }
 
     }
 
     @PostMapping("/login")
-    public String login(Model model, User user){
-        //TODO write a method which verifies credentials and logs in
+    public String login(Model model, User user, HttpSession session){
         User valUser = userService.validateUser(user);
         if(valUser == null) {
             return  "index";
         }
         else {
-            model.addAttribute("user", valUser);
+            session.setAttribute("user", valUser);
             model.addAttribute("posts", postService.getPostsByUserId(valUser.getUserId()));
             return "user-profile";
         }
@@ -71,8 +71,10 @@ public class UserController {
     }
 
     @GetMapping("/delete")
-    public String delete(){
-        return "user-delete";
+    public String delete(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        userService.deleteUser(user);
+        return "redirect:index";
     }
 
     @GetMapping("feed")
@@ -86,7 +88,8 @@ public class UserController {
     }
 
     @GetMapping("list-of-users")
-    public String goToListOfUsers(){
+    public String goToListOfUsers(Model model){
+        model.addAttribute("users", userService.getActiveUsers());
         return "user-list";
     }
 }

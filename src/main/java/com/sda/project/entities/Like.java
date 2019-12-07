@@ -20,12 +20,12 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    //@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    private Integer userId;
+    private User user;
 
-    //@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "post_id")
-    private Integer postId;
+    private Post post;
 
 }

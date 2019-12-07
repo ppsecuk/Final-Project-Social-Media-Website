@@ -138,9 +138,9 @@
         <div class="col-md-6">
             <div class="widget-area no-padding blank">
                 <div class="status-upload">
-                    <form method="post" th:action="@{/post/${post.id}/comment}">
-                        <textarea name="content" placeholder="What are you doing right now?" ></textarea>
-                        <input type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Share</input>
+                    <form method="post" th:action="@{/post/{postId}/comment(postId=${post.id})}">
+                        <textarea name="content" placeholder="Start typing..." ></textarea>
+                        <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Comment</button>
                     </form>
                 </div>
             </div>

@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -36,9 +37,10 @@ public class Post {
     @NotBlank
     private String content;
 
-    private Integer likes;
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Comment> comments;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
-    private List<Comment> comments;
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Like> likes;
 
 }
