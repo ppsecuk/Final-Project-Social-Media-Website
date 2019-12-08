@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -51,6 +52,9 @@ public class User {
 
     @Enumerated(value = EnumType.STRING)
     private UserStatus status;
+
+    @OneToMany(mappedBy = "firstUser", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Friend> friends;
 
 //    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 //    private List<Post> posts;
