@@ -1,5 +1,7 @@
 package com.sda.project.services;
 
+import com.sda.project.entities.Friend;
+import com.sda.project.entities.FriendStatus;
 import com.sda.project.entities.User;
 import com.sda.project.entities.UserStatus;
 import com.sda.project.repositories.UsersRepository;
@@ -15,6 +17,10 @@ public class UserService {
 
     @Autowired
     private UsersRepository userRepository;
+
+    public User findUserById(Integer userId) {
+        return  userRepository.findById(userId).get();
+    }
 
     public User createUser(User user) {
         user.setStatus(UserStatus.ACTIVE);
@@ -41,5 +47,22 @@ public class UserService {
     public User deleteUser(User user) {
         user.setStatus(UserStatus.INACTIVE);
         return userRepository.save(user);
+    }
+
+    public void addFriend(User firstUser, Integer secondUserId){
+        User secondUser = userRepository.findById(secondUserId).get();
+        Friend friend = new Friend();
+        friend.setFirstUser(firstUser);
+        friend.setSecondUser(secondUser);
+        friend.setStatus(FriendStatus.APPROVED);
+        firstUser.getFriends().add(friend);
+        userRepository.save(firstUser);
+
+        Friend friend2 = new Friend();
+        friend2.setFirstUser(secondUser);
+        friend2.setSecondUser(firstUser);
+        friend2.setStatus(FriendStatus.APPROVED);
+        secondUser.getFriends().add(friend2);
+        userRepository.save(secondUser);
     }
 }

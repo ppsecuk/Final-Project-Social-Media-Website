@@ -112,8 +112,9 @@
         <div class="col-md-4">
             <div class="profile-img">
                 <br>
-                <img src="https://wj32.org/processhacker/forums/styles/canvas/theme/images/no_avatar.jpg"
-                     height="245" width="220" alt=""/><br>
+                <img th:src="@{${'/img/' + session.user.profilePicture}}" />
+                <!--<img src="https://wj32.org/processhacker/forums/styles/canvas/theme/images/no_avatar.jpg"
+                     height="245" width="220" alt=""/>--><br>
 
             </div>
         </div>
@@ -203,6 +204,12 @@
                             <p>Expert</p>
                         </div>
                     </div>-->
+                    <form method="post" th:action="@{/post}">
+                        <div class="col-md-9"><textarea rows="7" cols="50" name="content" placeholder="Start typing..." ></textarea>
+                        </div>
+                        <div class="col-md-3"><button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Post</button>
+                        </div>
+                    </form>
                     <div th:each="post : ${posts}" th:insert="post :: postFragment"></div>
                 </div>
             </div>

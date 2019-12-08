@@ -135,12 +135,14 @@
 <div class="container" th:fragment="commentFragment">
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="widget-area no-padding blank">
                 <div class="status-upload">
                     <form method="post" th:action="@{/post/{postId}/comment(postId=${post.id})}">
-                        <textarea name="content" placeholder="Start typing..." ></textarea>
-                        <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Comment</button>
+                            <div class="col-md-9"><textarea rows="4" cols="50" name="content" placeholder="Start typing..." ></textarea>
+                            </div>
+                            <div class="col-md-3"><button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Comment</button>
+                            </div>
                     </form>
                 </div>
             </div>

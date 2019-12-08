@@ -22,8 +22,10 @@ public class PostController {
     private PostService postService;
 
     @PostMapping
-    public String savePost(Post post) {
-        postService.savePost(post);
+    public String savePost(Post post, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        postService.savePost(post, user);
+        model.addAttribute("posts", postService.getPostsByUserId(user.getUserId()));
         return  "user-profile";
     }
 

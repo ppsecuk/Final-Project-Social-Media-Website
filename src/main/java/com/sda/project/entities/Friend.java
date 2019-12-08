@@ -6,57 +6,29 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Entity
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
+@Table(name = "friends")
 public class Friend {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    @Column(unique = true, nullable = false)
+    private Integer id;
 
-    @NotBlank
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "first_user_id")
+    private User firstUser;
 
-    @NotBlank
-    private String firstName;
+    @ManyToOne
+    @JoinColumn(name = "second_user_id")
+    private User secondUser;
 
-    @NotBlank
-    private String lastName;
+    @Enumerated(value = EnumType.STRING)
+    private FriendStatus status;
 
-    @Email
-    @NotBlank
-    @Column(unique = true)
-    private String email;
-
-    @NotBlank
-    private String gender;
-    // it needs enum
-
-    @NotNull
-    private LocalDate dob;
-
-    private String profilePicture;
-
-    @NotNull
-    private String status;
-
-    public Friend(String password, String firstName, String lastName, String email, String gender, LocalDate dob,
-                   String profilePicture, String status) {
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.dob = dob;
-        this.profilePicture = profilePicture;
-        this.status = status;
-    }
 }
